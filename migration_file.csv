@@ -1,0 +1,5 @@
+DB Identifier,Endpoint Address,Port,ReplicationUsername,ReplicationPassword,ProjectId,Version,Location,StorageType,CPU,Memory,Storage
+database1,database1.ifoewjfoiewjf.us-east-1.rds.amazonaws.com,5432,postgres,postgres,aws-rds-gcp-cloudsql,POSTGRES_12,us-east4,PD_SSD,2,1,15
+database2,database2.ifoewjfoiewjf.us-east-1.rds.amazonaws.com,5432,postgres,postgres,aws-rds-gcp-cloudsql,POSTGRES_11,us-east4,PD_SSD,1,1,10
+database3,database3.ifoewjfoiewjf.us-east-1.rds.amazonaws.com,5432,postgres,postgres,aws-rds-gcp-cloudsql,POSTGRES_12,us-east4,PD_SSD,2,1,12
+database4,database4.ifoewjfoiewjf.us-east-1.rds.amazonaws.com,5432,postgres,postgres,aws-rds-gcp-cloudsql,POSTGRES_11,us-east4,PD_SSD,1,1,18
