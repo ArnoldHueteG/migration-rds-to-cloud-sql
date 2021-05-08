@@ -5,7 +5,7 @@ This code automatize the process of migrate several aws rds instances to gcp clo
 ## Installation
 
 ```bash
-pip requirements.txt
+pipenv install
 ```
 
 ## Usage
