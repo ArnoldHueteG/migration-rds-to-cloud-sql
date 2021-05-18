@@ -12,18 +12,26 @@ from multiprocessing import log_to_stderr, get_logger
 import logging
 import argparse
 
+
 # In[2]:
+
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--migration-file', type=str)
-args = parser.parse_args()
+args = parser.parse_args("")
 
 migration_file = args.migration_file or 'Test GCP Migration.csv'
-
 df_machine_types = pd.read_csv('machine_types.csv')
 df_migration_data = pd.read_csv(migration_file)
 
 
 # In[3]:
+
+
+display(df_migration_data)
+
+
+# In[4]:
 
 
 project_id = 'aws-rds-gcp-cloudsql'
@@ -34,7 +42,7 @@ prefix_mj='auto-mj-'
 now_str = datetime.now().strftime("%Y%m%dt%H%M%S")
 
 
-# In[4]:
+# In[5]:
 
 
 list_migration_job = []
@@ -63,22 +71,10 @@ for index, row in df_migration_data.iterrows():
     list_migration_job.append((dc["prefix_dict"],dc["location_dict"],dc["source_connection"],dc["target_base_settings_cloud_sql"],dc["target_server_settings_cloud_sql"]))
 
 
+# In[6]:
 
 
-# In[5]:
-
-
-#list_migration_job
-
-
-# In[10]:
-
-#for migration_job in list_migration_job:
-#    dms.generate_migration_job(*migration_job)
 if __name__ == '__main__':
-    #log_to_stderr()
-    #logger = get_logger()
-    #logger.setLevel(logging.INFO)
     
     jobs = []
     for (a,b,c,d,e) in list_migration_job:
@@ -87,4 +83,4 @@ if __name__ == '__main__':
         jobs.append(p)
     for job in jobs:
         job.join()
-        
+
