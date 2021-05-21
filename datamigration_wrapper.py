@@ -282,4 +282,3 @@ def get_prefix(prefix_dict):
     print(prefix_mj)
 
 
-print ("hola mundo")
