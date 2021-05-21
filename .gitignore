@@ -1,0 +1,6 @@
+.vscode
+.ipynb_checkpoints
+logs
+Test GCP Migration.csv
+notes.txt
+__pycache__
