@@ -4,3 +4,11 @@ logs
 Test GCP Migration.csv
 notes.txt
 __pycache__
+reader.py
+wrapper.py
+local_secrets
+demo.py
+*.pkl
+pg_dump.txt
+*.ipynb
+migrationfile_reader copy.py
