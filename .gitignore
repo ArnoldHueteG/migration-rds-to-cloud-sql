@@ -12,4 +12,3 @@ demo.py
 pg_dump.txt
 *.ipynb
 migrationfile_reader copy.py
-postmigration_validation.py
