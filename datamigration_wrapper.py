@@ -11,6 +11,7 @@ from pgdb import connect
 from local_secrets.environment_vars import *
 
 debug_mode = True
+# Adding fix
 
 
 class DataMigrationService:
