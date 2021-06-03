@@ -17,7 +17,7 @@ pipenv install
 ## Usage
 
 ```bash
-python poc-migration-auto.py --migration-file "migration_file.csv"
+python migrationfile_reader.py --migration-file "migration_file.csv"
 ```
 
 ### Optional arguments:

@@ -10,14 +10,11 @@ import pandas as pd
 import datamigration_wrapper as dms
 
 
-    
 def func(a, b, c, d, e):
     migration_job = dms.DataMigrationService(a, b, c, d, e)
     migration_job.generate_migration_job()
-"""
-def func(migration_job):
-    migration_job.generate_migration_job()
-"""
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--migration-file", type=str)
@@ -26,8 +23,6 @@ if __name__ == "__main__":
     migration_file = args.migration_file or "Test GCP Migration.csv"
     df_machine_types = pd.read_csv("machine_types.csv")
     df_migration_data = pd.read_csv(migration_file)
-
-    # print(df_migration_data)
 
     project_id = "aws-rds-gcp-cloudsql"
     region_id = "us-east4"
@@ -75,15 +70,15 @@ if __name__ == "__main__":
         )
     jobs = []
     for (a, b, c, d, e) in list_migration_job:
-        p = multiprocessing.Process(target=func,args=(a,b,c,d,e,),)
+        p = multiprocessing.Process(
+            target=func,
+            args=(
+                a,
+                b,
+                c,
+                d,
+                e,
+            ),
+        )
         p.start()
         jobs.append(p)
-#for (a,b,c,d,e) in list_migration_job:
-#        #migration_job = dms.DataMigrationService(a, b, c, d, e)
-#        #val = migration_job.get_state_from_migration_job()
-"""
-for mj in list_migration_job2:
-    val = mj.get_state_from_migration_job()
-    val_list.append(val)
-print(pd.DataFrame(val_list))
-"""
