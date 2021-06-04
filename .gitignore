@@ -6,7 +6,7 @@ notes.txt
 __pycache__
 reader.py
 wrapper.py
-local_secrets
+local
 demo.py
 *.pkl
 pg_dump.txt

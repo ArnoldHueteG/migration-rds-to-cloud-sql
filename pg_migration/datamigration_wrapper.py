@@ -12,6 +12,11 @@ from local_secrets.environment_vars import *
 
 debug_mode = True
 # Adding fix
+"""[summary]
+
+Returns:
+    [type]: [description]
+"""
 
 
 class DataMigrationService:
