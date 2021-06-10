@@ -7,11 +7,12 @@ from multiprocessing import get_logger, log_to_stderr
 
 import pandas as pd
 
-import datamigration_wrapper as dms
+import dms_wrapper as dms
 
 
 def func(a, b, c, d, e):
     migration_job = dms.DataMigrationService(a, b, c, d, e)
+    migration_job.logger.setLevel(logging.DEBUG)
     migration_job.generate_migration_job()
 
 
@@ -20,12 +21,13 @@ if __name__ == "__main__":
     parser.add_argument("--migration-file", type=str)
     args = parser.parse_args("")
 
-    migration_file = args.migration_file or "Test GCP Migration.csv"
-    df_machine_types = pd.read_csv("machine_types.csv")
+    migration_file = args.migration_file or "data/input/migration_file_test2.csv"
+    df_machine_types = pd.read_csv("data/parameters/machine_types.csv")
+    print(migration_file)
     df_migration_data = pd.read_csv(migration_file)
 
-    project_id = "aws-rds-gcp-cloudsql"
-    region_id = "us-east4"
+    #project_id = "aws-rds-gcp-cloudsql"
+    #region_id = "us-east4"
     prefix_cp_source = "auto-cp-pg-"
     prefix_cp_cloudsql = "auto-cs-pg-"
     prefix_mj = "auto-mj-"
@@ -46,7 +48,7 @@ if __name__ == "__main__":
             "tier": "db-custom-1-3840",
             "dataDiskSizeGb": row["Storage"],
         }
-        dc["location_dict"] = {"project_id": project_id, "region_id": region_id}
+        dc["location_dict"] = {"project_id": row["ProjectId"], "region_id": row["Location"] }
         dc["prefix_dict"] = {
             "prefix_cp_source": prefix_cp_source,
             "prefix_cp_cloudsql": prefix_cp_cloudsql,

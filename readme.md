@@ -16,15 +16,30 @@ pipenv install
 
 ## Usage
 
+### migrate
+
 ```bash
-python migrationfile_reader.py --migration-file "migration_file.csv"
+python pg_migration/migrationfile_reader.py --migration-file "migration_file.csv"
 ```
 
-### Optional arguments:
+#### Optional arguments
 
-#### Parameter –-migration-file
+##### Parameter ï¿½-migration-file
 
 Indicates the file name where there are the credentials of rds instances.
 
+### get status
+
+```bash
+python pg_migration/pickles_reader.py
+```
+
+### validate migration
+
+```bash
+python pg_migration/postmigration_validation.py
+```
+
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)
