@@ -1,0 +1,6 @@
+gcloud sql instances describe auto-cs-pg-0-database-1-20210610t121134 --project aws-rds-gcp-cloudsql
+
+
+./cloud_sql_proxy -instances=aws-rds-gcp-cloudsql:us-east4:auto-cs-pg-0-database-1-20210610t121134=tcp:0.0.0.0:5431
+
+psql "host=127.0.0.1 sslmode=disable dbname=postgres user=postgres"

@@ -12,3 +12,6 @@ demo.py
 pg_dump.txt
 *.ipynb
 migrationfile_reader copy.py
+migration_file_test*
+cloud_sql_proxy
+*environment_vars.py

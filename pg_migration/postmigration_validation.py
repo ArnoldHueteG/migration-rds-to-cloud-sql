@@ -1,4 +1,4 @@
-from pgdb import connect
+#from pgdb import connect
 import psycopg2
 import itertools
 import json
@@ -8,7 +8,7 @@ from queue import Queue
 from threading import Thread
 from timer import Timer
 import logging
-from local_secrets.environment_vars import *
+from local.secrets.environment_vars import BD_CONNECTION_1,BD_CONNECTION_2
 
 
 class PostMigrationValidation:

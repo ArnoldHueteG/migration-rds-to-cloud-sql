@@ -8,8 +8,7 @@ oauth2client = "==4.1.3"
 google-api-python-client = "==2.3.0"
 pandas = "==1.2.4"
 ipykernel = "==5.5.4"
-pygresql = "==5.2.2"
-psycopg2 = "==2.8.6"
+psycopg2-binary = "2.8.6"
 codetiming = "==1.3.0"
 
 [dev-packages]

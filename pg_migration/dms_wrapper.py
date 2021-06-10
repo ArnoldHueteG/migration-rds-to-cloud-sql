@@ -4,19 +4,16 @@ import multiprocessing
 import time
 from datetime import datetime
 import pickle
+from pathlib import Path
 
 from googleapiclient import discovery, errors
 from oauth2client.client import GoogleCredentials
-from pgdb import connect
-from local_secrets.environment_vars import *
 
-debug_mode = True
-# Adding fix
-"""[summary]
+import psycopg2
+from local.secrets.environment_vars import BD_CONNECTION_1
 
-Returns:
-    [type]: [description]
-"""
+
+debug_mode = False
 
 
 class DataMigrationService:
@@ -119,20 +116,21 @@ class DataMigrationService:
         self.migration_job_id = "{1}{0}-{2}-{3}".format(
             self.id, self.prefix_mj, self.rds_name, self.now_str
         )
-        self.logfile_name = "logs/{3}-{1}{0}-{2}.log".format(
+        self.logfile_name = "data/output/logs/{3}-{1}{0}-{2}.log".format(
             self.id, self.prefix_mj, self.rds_name, self.now_str
         )
         # self.logfile_name = "logs/{1}{0}-{2}.log".format(self.id, self.prefix_mj, self.rds_name)
-        self.picklefile_name = f"pickles/{self.id}-{self.rds_name}.pkl"
+        self.picklefile_name = f"data/output/pickles/{self.id}-{self.rds_name}.pkl"
         self.logger = self.setup_logger(
             f"{self.id} - {self.rds_name}", self.logfile_name
         )
         self.logger.setLevel(logging.INFO)
+        Path("/".join(self.picklefile_name.split("/")[:-1])).mkdir(parents=True, exist_ok=True)
         with open(self.picklefile_name, "wb") as output:
             pickle.dump(self, output)
 
     def setup_logger(self, logger_name=None, logfile_name=None):
-
+        Path("/".join(logfile_name.split("/")[:-1])).mkdir(parents=True, exist_ok=True)
         logger = logging.getLogger(logger_name)
 
         formatter = logging.Formatter(
@@ -172,8 +170,8 @@ class DataMigrationService:
             "displayName": self.connection_profile_id_cloudsql,
             "cloudsql": {
                 "settings": {
-                    **target_base_settings_cloud_sql,
-                    **target_server_settings_cloud_sql,
+                    **self.target_base_settings_cloud_sql,
+                    **self.target_server_settings_cloud_sql,
                     "sourceId": "projects/{}/locations/{}/connectionProfiles/{}".format(
                         self.project_id,
                         self.region_id,
@@ -208,8 +206,8 @@ class DataMigrationService:
         source_connection["database"] = "postgres"
         try:
             self.logger.info("Testing connection")
-            conn = connect(
-                database=source_connection["database"],
+            conn = psycopg2.connect(
+                dbname=source_connection["database"],
                 host=source_connection["host"],
                 user=source_connection["username"],
                 password=source_connection["password"],
@@ -347,7 +345,7 @@ if __name__ == "__main__":
         "id": 0,
     }
     location_dict = {
-        "project_id": "aws-rds-gcp-cloudsql",
+        "project_id": "dceng-testing-au-data",
         "region_id": "us-east4",
     }
     source_connection = {
